@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blueish_green"
+    tools:context="com.bignerdranch.android.adam_chess_app.MainActivity">
+
+    <Button
+        android:id="@+id/btnBeginGame"
+        android:layout_width="150sp"
+        android:layout_height="80sp"
+        android:textSize="30dp"
+        android:text="Begin Game"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorAccent"
+        />
+
+    <TextView
+        android:id="@+id/txtDescribeChecks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnBeginGame"
+        android:textSize="20sp"
+        android:text="Any player not checked as \'Human\' will be controlled by artificial intelligence."
+        android:textColor="@color/yellow"
+        />
+
+    <CheckBox
+        android:id="@+id/checkPlayerOneHuman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnBeginGame"
+        android:layout_below="@+id/txtDescribeChecks"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="50dp"
+        android:text="Player One is human"/>
+
+    <CheckBox
+        android:id="@+id/checkPlayerTwoHuman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/checkPlayerOneHuman"
+        android:layout_below="@+id/checkPlayerOneHuman"
+        android:layout_marginTop="20dp"
+        android:text="Player Two is human"/>
+
+
+</RelativeLayout>
