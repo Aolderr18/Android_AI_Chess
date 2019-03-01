@@ -1,0 +1,85 @@
+package com.bignerdranch.android.adam_chess_app;
+
+public class ChessMoveDispatcher {
+
+    public static int[] generateChessMove(ChessBoard board, int p1_attack_index, int p2_attack_index, int[] previous_p1_piece_counts, int[] previous_p2_piece_counts) throws NullPointerException {
+        int p, s;
+        int x, y, u, v;
+        int X, Y, U, V;
+        final int chessBoardSize = ChessBoard.chessBoardSize;
+        boolean changed = false;
+        if (board.isPlayerOneTurn()) {
+            if (previous_p1_piece_counts[7] < 16) {
+                for (p = 0; p < chessBoardSize - 1; p++)
+                    for (s = p + 1; s < chessBoardSize; s++)
+                        if (previous_p1_piece_counts[p] != previous_p1_piece_counts[s]) {
+                            changed = true;
+                            break;
+                        }
+            } else
+                changed = true;
+            final int rand_move = (int) (Math.random() * 4);
+            if (!changed && rand_move == 1) {
+                final int[] x_indices = MainActivity.generateRandomIntegerIndices(chessBoardSize);
+                final int[] y_indices = MainActivity.generateRandomIntegerIndices(chessBoardSize);
+                final int[] u_indices = MainActivity.generateRandomIntegerIndices(chessBoardSize);
+                final int[] v_indices = MainActivity.generateRandomIntegerIndices(chessBoardSize);
+                for (x = 0; x < chessBoardSize; x++)
+                    for (y = 0; y < chessBoardSize; y++)
+                        for (u = 0; u < chessBoardSize; u++)
+                            for (v = 0; v < chessBoardSize; v++) {
+                                X = x_indices[x];
+                                Y = y_indices[y];
+                                U = u_indices[u];
+                                V = v_indices[v];
+                                try {
+                                    new ChessMove(board, X, Y, U, V);
+                                    return new int[]{X, Y, U, V};
+                                } catch (InvalidChessMoveException ivcmexc) {
+
+                                }
+                            }
+            } else {
+                SmartChessStrategySelector selectorP1 = new SmartChessStrategySelectorP1(board, p1_attack_index == 1);
+                Integer[] choice = selectorP1.getChoice();
+                return new int[] { choice[0], choice[1], choice[2], choice[3] };
+            }
+        }
+        if (previous_p2_piece_counts[7] < 16) {
+            for (p = 0; p < chessBoardSize - 1; p++)
+                for (s = p + 1; s < chessBoardSize; s++)
+                    if (previous_p2_piece_counts[p] != previous_p2_piece_counts[s]) {
+                        changed = true;
+                        break;
+                    }
+        } else
+            changed = true;
+        if (!changed) {
+            final int[] x_indices = MainActivity.generateRandomIntegerIndices(chessBoardSize);
+            final int[] y_indices = MainActivity.generateRandomIntegerIndices(chessBoardSize);
+            final int[] u_indices = MainActivity.generateRandomIntegerIndices(chessBoardSize);
+            final int[] v_indices = MainActivity.generateRandomIntegerIndices(chessBoardSize);
+            for (x = 0; x < chessBoardSize; x++)
+                for (y = 0; y < chessBoardSize; y++)
+                    for (u = 0; u < chessBoardSize; u++)
+                        for (v = 0; v < chessBoardSize; v++) {
+                            X = x_indices[x];
+                            Y = y_indices[y];
+                            U = u_indices[u];
+                            V = v_indices[v];
+                            try {
+                                new ChessMove(board, X, Y, U, V);
+                                return new int[]{X, Y, U, V};
+                            } catch (InvalidChessMoveException ivcmexc) {
+
+                            }
+                        }
+        } else {
+            SmartChessStrategySelector selectorP2 = new SmartChessStrategySelectorP2(board, p2_attack_index == 1);
+            Integer[] choice = selectorP2.getChoice();
+            return new int[] { choice[0], choice[1], choice[2], choice[3] };
+        }
+        throw new NullPointerException();
+    }
+
+}
