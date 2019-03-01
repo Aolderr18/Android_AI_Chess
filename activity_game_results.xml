@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:background="@color/purple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtVictory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Winner"
+        android:textSize="20sp"
+        />
+
+    <Button
+        android:id="@+id/btnBackToGameSettings"
+        android:layout_width="160sp"
+        android:layout_height="110sp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/txtVictory"
+        android:text="New Game?"
+        android:textSize="30dp"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
+        />
+
+</RelativeLayout>
